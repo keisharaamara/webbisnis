@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Amara's Collection — Toko Barang Lucu & Unik</title>
+  <meta name="description" content="Amara's Collection — toko online barang lucu & unik untuk remaja" />
+
+  <style>
+    :root{
+      --pink:#ff7ab6; /* soft pink */
+      --blue:#6ec8ff; /* sky blue */
+      --yellow:#ffd86b; /* warm yellow */
+      --bg: linear-gradient(135deg,var(--blue),var(--pink));
+      --card-radius:18px;
+      --glass: rgba(255,255,255,0.08);
+      --glass-2: rgba(255,255,255,0.12);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    html,body{height:100%;margin:0;background:var(--bg);font-size:16px;color:#102a43}
+
+    /* Page container */
+    .wrap{max-width:1100px;margin:28px auto;padding:28px}
+
+    header{
+      display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px;
+    }
+
+    .brand{
+      display:flex;align-items:center;gap:12px;background:transparent;padding:6px 12px;border-radius:14px;backdrop-filter: blur(6px);
+      box-shadow: 0 6px 18px rgba(16,42,67,0.12);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .logo{width:56px;height:56px;border-radius:12px;background: linear-gradient(180deg,var(--pink),var(--yellow));display:flex;align-items:center;justify-content:center;font-weight:700;color:white;font-size:18px}
+    h1{margin:0;font-size:20px}
+    .tag{font-size:12px;color:rgba(16,42,67,0.7)}
+
+    /* nav */
+    .nav{display:flex;gap:10px;align-items:center}
+    .btn{padding:10px 14px;border-radius:12px;border:none;cursor:pointer;font-weight:600}
+    .btn-ghost{background:transparent}
+    .btn-primary{background:linear-gradient(90deg,var(--pink),var(--yellow));color:white}
+
+    /* hero */
+    .hero{display:grid;grid-template-columns:1fr 360px;gap:20px;align-items:start}
+
+    .hero-left{background:rgba(255,255,255,0.06);padding:22px;border-radius:18px}
+    .hero-left h2{margin:0 0 8px 0}
+    .hero-left p{margin:0 0 12px 0;color:rgba(16,42,67,0.7)}
+
+    /* slider */
+    .slider{position:relative;border-radius:14px;overflow:hidden;height:220px;background:#fff}
+    .slides{display:flex;height:100%;transition:transform .7s cubic-bezier(.2,.9,.25,1)}
+    .slide{flex:0 0 100%;display:flex;align-items:center;justify-content:center;font-size:22px;color:white}
+    .slide svg{width:100%;height:100%;object-fit:cover}
+    .slider-controls{position:absolute;left:12px;right:12px;bottom:12px;display:flex;justify-content:space-between}
+
+    /* products grid */
+    .products{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.85),rgba(255,255,255,0.7));padding:14px;border-radius:var(--card-radius);box-shadow:0 6px 18px rgba(2,6,23,0.08);transform-origin:center;transition:transform .22s ease,box-shadow .22s}
+    .card:hover{transform:translateY(-8px);box-shadow:0 18px 40px rgba(2,6,23,0.12)}
+    .product-img{height:140px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--glass-2);margin-bottom:10px}
+    .product-title{font-weight:700;margin:0}
+    .price{font-weight:800;margin-top:6px}
+    .actions{display:flex;gap:8px;margin-top:10px}
+
+    /* cart button */
+    .cart-btn{position:fixed;right:22px;bottom:22px;width:62px;height:62px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;background:linear-gradient(180deg,var(--pink),var(--blue));color:white;box-shadow:0 18px 40px rgba(0,0,0,0.18);z-index:60}
+    .cart-count{position:absolute;top:-8px;right:-8px;background:var(--yellow);color:#102a43;padding:6px;border-radius:50%;font-weight:800;font-size:12px}
+
+    /* modal */
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,6,23,0.45);z-index:80}
+    .modal.show{display:flex}
+    .modal-card{width:480px;max-width:92%;background:white;border-radius:16px;padding:20px}
+    .cart-list{max-height:300px;overflow:auto}
+    .cart-item{display:flex;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid rgba(2,6,23,0.06)}
+
+    /* checkout button */
+    .checkout{background:linear-gradient(90deg,var(--blue),var(--pink));color:white;padding:12px;border-radius:12px;border:none;width:100%;font-weight:800}
+
+    /* footer */
+    footer{margin-top:30px;color:rgba(16,42,67,0.7);text-align:center}
+
+    /* animations */
+    @keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-8px)}100%{transform:translateY(0)}}
+    @keyframes pop{0%{transform:scale(.98)}60%{transform:scale(1.03)}100%{transform:scale(1)}}
+
+    /* responsive */
+    @media(max-width:900px){
+      .hero{grid-template-columns:1fr}
+      .brand h1{display:none}
+    }
+
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand" aria-hidden>
+        <div class="logo">AC</div>
+        <div>
+          <h1>Amara's Collection</h1>
+          <div class="tag">Pilihan barang lucu & unik untuk remaja — pemilik: Keishara Amara</div>
+        </div>
+      </div>
+      <nav class="nav">
+        <button class="btn btn-ghost" onclick="scrollToProducts()">Produk</button>
+        <button class="btn btn-ghost" onclick="viewAbout()">Tentang</button>
+        <button class="btn btn-primary" onclick="openCart()">Keranjang • <span id="top-count">0</span></button>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="hero-left">
+        <h2>Selamat datang di Amara's Collection</h2>
+        <p>Temukan aksesori, pernak-pernik, dan hadiah aesthetic yang pas untuk kamu dan temanmu. Semua lucu, kekinian, dan cocok untuk remaja.</p>
+
+        <div class="slider" aria-label="galeri produk">
+          <div class="slides" id="slides">
+            <div class="slide" style="background:linear-gradient(135deg,var(--pink),var(--blue));">
+              <svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+                <rect width="100%" height="100%" fill="rgba(255,255,255,0.06)"/>
+                <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="34" fill="white">Lucu & Aesthetic</text>
+              </svg>
+            </div>
+            <div class="slide" style="background:linear-gradient(135deg,var(--yellow),var(--pink));">
+              <svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+                <rect width="100%" height="100%" fill="rgba(255,255,255,0.06)"/>
+                <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="34" fill="white">Hadiah Anti Mainstream</text>
+              </svg>
+            </div>
+            <div class="slide" style="background:linear-gradient(135deg,var(--blue),var(--yellow));">
+              <svg viewBox="0 0 800 300" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+                <rect width="100%" height="100%" fill="rgba(255,255,255,0.06)"/>
+                <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="34" fill="white">Barang Limited</text>
+              </svg>
+            </div>
+          </div>
+          <div class="slider-controls">
+            <button class="btn" onclick="prevSlide()">◀</button>
+            <button class="btn" onclick="nextSlide()">▶</button>
+          </div>
+        </div>
+
+        <div style="margin-top:14px;display:flex;gap:10px">
+          <button class="btn btn-primary" onclick="openCart()">Buka Keranjang</button>
+          <button class="btn btn-ghost" onclick="playMusic()" id="musicBtn">▶ Backsound</button>
+        </div>
+      </div>
+
+      <aside style="display:flex;flex-direction:column;gap:12px">
+        <div style="background:rgba(255,255,255,0.9);padding:14px;border-radius:14px">
+          <h3 style="margin:0">Story</h3>
+          <p style="margin:6px 0 0 0;color:rgba(16,42,67,0.7)">Hai, aku Keishara Amara - pemilik Amara's Collection. Semua barang diseleksi dari desain yang playful dan nyaman dipakai. Nikmati belanja!</p>
+        </div>
+
+        <div style="background:rgba(255,255,255,0.9);padding:14px;border-radius:14px">
+          <h4 style="margin:0 0 6px 0">Promo</h4>
+          <div style="display:flex;gap:8px;align-items:center">
+            <div style="width:54px;height:54px;border-radius:12px;background:linear-gradient(90deg,var(--pink),var(--yellow));display:flex;align-items:center;justify-content:center;font-weight:800;color:white">10%</div>
+            <div>
+              <div style="font-weight:800">Diskon Peluncuran</div>
+              <div style="font-size:13px;color:rgba(16,42,67,0.7)">Untuk pembelian pertama</div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="products" class="products" aria-live="polite">
+      <!-- product cards inserted by JS -->
+    </section>
+
+    <footer>
+      © <span id="year"></span> Amara's Collection — dibuat dengan cinta ❤️
+    </footer>
+  </div>
+
+  <button class="cart-btn" title="Keranjang" onclick="openCart()">🛒 <span class="cart-count" id="cart-count">0</span></button>
+
+  <!-- modal -->
+  <div id="modal" class="modal" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <h3>Keranjang Kamu</h3>
+      <div class="cart-list" id="cart-list"></div>
+      <div style="margin-top:12px;display:flex;gap:8px">
+        <button class="btn btn-ghost" onclick="closeCart()">Lanjut Belanja</button>
+        <button class="checkout" onclick="checkout()">Checkout — Bayar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- lightweight music (external free track recommended) -->
+  <!-- Saran: gunakan musik bebas copyright dari situs seperti FreePD, Pixabay Music, atau bensound.com. Ini contoh file placeholder (harus diganti jika mengupload): -->
+  <audio id="bgm" loop preload="auto">
+    <source src="https://cdn.pixabay.com/download/audio/2022/07/11/audio_7f2a3a3d53.mp3?filename=bright-acoustic-ambient-11101.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    // Data produk contoh
+    const products = [
+      {id:1,name:"Gantungan Kunci Plush Kucing",price:59000,desc:"Super fluffy, perfect buat tas sekolah.",img:""},
+      {id:2,name:"Sticker Pack Aesthetic",price:25000,desc:"18 desain stiker waterproof.",img:""},
+      {id:3,name:"Lampu Neon Mini",price:129000,desc:"Lampu USB, mood light.",img:""},
+      {id:4,name:"Sisir Lucu Bento",price:45000,desc:"Sisir motif buah-buahan." ,img:""},
+      {id:5,name:"Scrunchie Velvet",price:30000,desc:"Super lembut, warna pastel.",img:""},
+      {id:6,name:"Notebook Doodle",price:38000,desc:"Halaman tebal, cocok buat diary.",img:""}
+    ];
+
+    // Render products
+    const productsEl = document.getElementById('products');
+    function currency(n){return 'Rp ' + n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')}
+    products.forEach(p=>{
+      const c = document.createElement('article');c.className='card';
+      c.innerHTML = `
+        <div class="product-img">
+          <svg width="100%" height="100%" viewBox="0 0 300 200" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <rect width="100%" height="100%" rx="12" fill="rgba(16,42,67,0.04)" />
+            <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="20" fill="#102a43">${p.name}</text>
+          </svg>
+        </div>
+        <h3 class="product-title">${p.name}</h3>
+        <div class="price">${currency(p.price)}</div>
+        <div style="font-size:13px;color:rgba(16,42,67,0.7)">${p.desc}</div>
+        <div class="actions">
+          <button class="btn btn-ghost" onclick="addToCart(${p.id})">Tambah</button>
+          <button class="btn btn-primary" onclick="buyNow(${p.id})">Beli Sekarang</button>
+        </div>
+      `;
+      productsEl.appendChild(c);
+    });
+
+    // slider logic
+    let current = 0;const slides = document.getElementById('slides');
+    function showSlide(i){current = (i+3)%3;slides.style.transform = `translateX(-${current*100}%)`}
+    function nextSlide(){showSlide(current+1)}
+    function prevSlide(){showSlide(current-1)}
+    setInterval(nextSlide,4500);
+
+    // cart
+    let cart = JSON.parse(localStorage.getItem('ac_cart')||'[]');
+    const cartCount = document.getElementById('cart-count');
+    const topCount = document.getElementById('top-count');
+    function updateCartUI(){
+      const totalCount = cart.reduce((s,i)=>s+i.qty,0);
+      cartCount.textContent = totalCount;topCount.textContent = totalCount;document.getElementById('cart-count').setAttribute('aria-label', totalCount+' items');
+      localStorage.setItem('ac_cart',JSON.stringify(cart));
+    }
+
+    function addToCart(id){
+      const p = products.find(x=>x.id===id);if(!p) return;
+      const existing = cart.find(i=>i.id===id);
+      if(existing) existing.qty++;
+      else cart.push({id:p.id,name:p.name,price:p.price,qty:1});
+      updateCartUI();
+      toast('Ditambahkan ke keranjang — '+p.name);
+    }
+
+    function buyNow(id){addToCart(id);openCart();}
+
+    function openCart(){
+      renderCart();document.getElementById('modal').classList.add('show');
+    }
+    function closeCart(){document.getElementById('modal').classList.remove('show');}
+
+    function renderCart(){
+      const list = document.getElementById('cart-list');list.innerHTML='';
+      if(cart.length===0){list.innerHTML='<div style="padding:20px;color:rgba(16,42,67,0.7)">Keranjang kosong — ayo pilih barang yang lucu!</div>';return}
+      cart.forEach(item=>{
+        const el = document.createElement('div');el.className='cart-item';
+        el.innerHTML = `
+          <div style="width:58px;height:58px;border-radius:10px;background:rgba(16,42,67,0.04);display:flex;align-items:center;justify-content:center;font-size:12px">${item.name.split(' ')[0]}</div>
+          <div style="flex:1">
+            <div style="font-weight:800">${item.name}</div>
+            <div style="font-size:13px;color:rgba(16,42,67,0.65)">${currency(item.price)} x ${item.qty}</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">
+            <div style="font-weight:800">${currency(item.price*item.qty)}</div>
+            <div style="display:flex;gap:6px">
+              <button class="btn btn-ghost" onclick="changeQty(${item.id}, -1)">-</button>
+              <button class="btn btn-ghost" onclick="changeQty(${item.id}, 1)">+</button>
+            </div>
+          </div>
+        `;
+        list.appendChild(el);
+      });
+    }
+
+    function changeQty(id,delta){
+      const it = cart.find(i=>i.id===id);if(!it) return;
+      it.qty += delta;if(it.qty<=0) cart = cart.filter(i=>i.id!==id);
+      updateCartUI();renderCart();
+    }
+
+    function checkout(){
+      if(cart.length===0){toast('Keranjang kosong!');return}
+      // Simulasi checkout — di sini integrasikan payment gateway saat deploy nyata
+      const total = cart.reduce((s,i)=>s+i.qty*i.price,0);
+      const confirmed = confirm('Total: '+currency(total)+'\\nLanjut checkout? (simulasi)');
+      if(!confirmed) return;
+      // buat order sederhana
+      const order = {id: 'ORD'+Date.now(),items:cart,total,created:new Date().toISOString()};
+      console.log('Order',order);
+      cart = [];updateCartUI();renderCart();closeCart();toast('Pembayaran berhasil! Terima kasih.')
+    }
+
+    // toast
+    function toast(msg){
+      const t = document.createElement('div');t.textContent = msg; t.style.position='fixed';t.style.left='50%';t.style.transform='translateX(-50%)';t.style.bottom='90px';t.style.background='rgba(16,42,67,0.9)';t.style.color='white';t.style.padding='10px 14px';t.style.borderRadius='10px';t.style.zIndex=100;document.body.appendChild(t);
+      setTimeout(()=>t.style.opacity=.95,10);setTimeout(()=>{t.style.opacity=0;setTimeout(()=>t.remove(),400)},2400);
+    }
+
+    // misc
+    function scrollToProducts(){document.getElementById('products').scrollIntoView({behavior:'smooth'})}
+    function viewAbout(){alert(\"Amara's Collection — Toko barang lucu & unik. Pemilik: Keishara Amara.\")}
+
+    // music controls
+    const bgm = document.getElementById('bgm');let musicPlaying=false; function playMusic(){
+      if(!musicPlaying){bgm.play();document.getElementById('musicBtn').textContent='⏸ Backsound';musicPlaying=true}
+      else{bgm.pause();document.getElementById('musicBtn').textContent='▶ Backsound';musicPlaying=false}
+    }
+
+    // initial
+    document.getElementById('year').textContent = new Date().getFullYear();
+    updateCartUI();
+
+    // restore cart UI on load
+    window.addEventListener('load',()=>{renderCart();updateCartUI()});
+
+    // expose some functions for inline buttons
+    window.openCart = openCart;window.closeCart = closeCart;window.addToCart = addToCart;window.buyNow = buyNow;window.checkout = checkout;window.nextSlide=nextSlide;window.prevSlide=prevSlide;window.playMusic=playMusic;window.scrollToProducts=scrollToProducts;window.viewAbout=viewAbout
+  </script>
+</body>
+</html>
